@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 android {
     namespace = "com.kayan.x"
@@ -11,7 +12,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-        // VERIFIED: Only ndk.abiFilters - NO splits block per AGP 8 rule: cannot have both
         ndk {
             abiFilters += listOf("arm64-v8a")
         }
@@ -20,14 +20,10 @@ android {
         buildConfig = true
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.11"
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions { jvmTarget = "17" }
     externalNativeBuild {
         cmake {
             path = file("src/main/cpp/CMakeLists.txt")
